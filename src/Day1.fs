@@ -9,12 +9,12 @@ module Day1
         readInput |> Array.sumBy parseInput
 
     let private repeateInput input =
-        let singleInput = input |> Array.map parseInput
-
-        seq { while true do yield! singleInput }
+        seq { while true do yield! input }
 
     let private findFrequency n =
-        repeateInput readInput
+        let parsedInput = readInput |> Array.map parseInput
+
+        repeateInput parsedInput
         |> Seq.take n
         |> Seq.fold ( + ) 0
 

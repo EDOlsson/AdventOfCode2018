@@ -5,13 +5,13 @@ open Day2
 
 [<EntryPoint>]
 let main argv =
-    // let day1FinalFrequency = Day1.calculateFinalFrequency
+    let day1FinalFrequency = Day1.calculateFinalFrequency
 
-    // printfn "Day  1 : The final frequency is %d" day1FinalFrequency
+    printfn "Day  1 : The final frequency is %d" day1FinalFrequency
 
-    // let firstRepeatedFrequency = Day1.findFirstRepeatedFrequency
+    let firstRepeatedFrequency = Day1.findFirstRepeatedFrequency
 
-    // printfn "Day  1 : The first repeated frequency is %d" firstRepeatedFrequency
+    printfn "Day  1 : The first repeated frequency is %d" firstRepeatedFrequency
 
     let checksum = Day2.readInput
                    |> calculateChecksum
