@@ -1,5 +1,5 @@
 module Day2
-
+    open System
     let readInput =
         System.IO.File.ReadAllLines("day2-input", System.Text.Encoding.UTF8)
 
@@ -41,3 +41,21 @@ module Day2
                            |> Array.length
 
         (twoLetters + twoAndThreeLetters) * (twoAndThreeLetters + threeLetters)
+
+    let compareBoxIds (boxId1 : string) (boxId2 : string) =
+        boxId1.ToCharArray()
+        |> Array.fold2 (fun s c1 c2 -> if c1 = c2 then Array.append s [|c1|] else s) Array.empty (boxId2.ToCharArray())
+        |> System.String.Concat
+
+    let compareBoxId (allBoxIds : string[]) (boxId : string) =
+        allBoxIds
+        |> Array.filter (fun b -> b <> boxId)
+        |> Array.map (compareBoxIds boxId)
+        |> Array.maxBy String.length
+
+    let findSimilarBoxIds allBoxIds =
+        allBoxIds
+        |> Array.map (compareBoxId allBoxIds)
+        |> Array.maxBy String.length
+
+        // bokrleiuhxlqnwasgtycdv (nope)
