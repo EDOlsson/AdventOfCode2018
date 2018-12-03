@@ -9,7 +9,7 @@ module Day2
          | HasTwoAndThreeLetters
          | DontCare
 
-    let classifyBoxId (boxId : string) =
+    let private classifyBoxId (boxId : string) =
         let hasRepeatedLetters (boxId' : string) count =
             let repeated = boxId'.ToCharArray()
                             |> Array.groupBy id
@@ -42,12 +42,12 @@ module Day2
 
         (twoLetters + twoAndThreeLetters) * (twoAndThreeLetters + threeLetters)
 
-    let compareBoxIds (boxId1 : string) (boxId2 : string) =
+    let private compareBoxIds (boxId1 : string) (boxId2 : string) =
         boxId1.ToCharArray()
         |> Array.fold2 (fun s c1 c2 -> if c1 = c2 then Array.append s [|c1|] else s) Array.empty (boxId2.ToCharArray())
         |> System.String.Concat
 
-    let compareBoxId (allBoxIds : string[]) (boxId : string) =
+    let private compareBoxId (allBoxIds : string[]) (boxId : string) =
         allBoxIds
         |> Array.filter (fun b -> b <> boxId)
         |> Array.map (compareBoxIds boxId)
@@ -57,5 +57,3 @@ module Day2
         allBoxIds
         |> Array.map (compareBoxId allBoxIds)
         |> Array.maxBy String.length
-
-        // bokrleiuhxlqnwasgtycdv (nope)
