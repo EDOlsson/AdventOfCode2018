@@ -42,18 +42,18 @@ module Day2
 
         (twoLetters + twoAndThreeLetters) * (twoAndThreeLetters + threeLetters)
 
-    let private compareBoxIds (boxId1 : string) (boxId2 : string) =
+    let private compareTwoBoxIds (boxId1 : string) (boxId2 : string) =
         boxId1.ToCharArray()
         |> Array.fold2 (fun s c1 c2 -> if c1 = c2 then Array.append s [|c1|] else s) Array.empty (boxId2.ToCharArray())
         |> System.String.Concat
 
-    let private compareBoxId (allBoxIds : string[]) (boxId : string) =
+    let private compareBoxIdWithOtherBoxIds (allBoxIds : string[]) (boxId : string) =
         allBoxIds
         |> Array.filter (fun b -> b <> boxId)
-        |> Array.map (compareBoxIds boxId)
+        |> Array.map (compareTwoBoxIds boxId)
         |> Array.maxBy String.length
 
     let findSimilarBoxIds allBoxIds =
         allBoxIds
-        |> Array.map (compareBoxId allBoxIds)
+        |> Array.map (compareBoxIdWithOtherBoxIds allBoxIds)
         |> Array.maxBy String.length
