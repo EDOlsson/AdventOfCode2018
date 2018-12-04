@@ -1,0 +1,1 @@
+&'dotnet' @('build', './src/AdventOfCode.fsproj')

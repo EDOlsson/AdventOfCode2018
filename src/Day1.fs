@@ -8,13 +8,13 @@ module Day1
     let calculateFinalFrequency =
         readInput |> Array.sumBy parseInput
 
-    let private repeateInput input =
+    let private repeatInput input =
         seq { while true do yield! input }
 
     let private findFrequency n =
         let parsedInput = readInput |> Array.map parseInput
 
-        repeateInput parsedInput
+        repeatInput parsedInput
         |> Seq.take n
         |> Seq.fold ( + ) 0
 
@@ -26,7 +26,7 @@ module Day1
     let findFirstRepeatedFrequency =
         let existingFrequencies = new System.Collections.Generic.HashSet<int>()
 
-        repeateInput readInput
+        repeatInput readInput
          |> Seq.mapi (fun i _ -> evaluateFrequency existingFrequencies i)
          |> Seq.filter (snd >> not)
          |> Seq.head
